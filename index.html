@@ -1,0 +1,23 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>      
+<meta charset="UTF-8">      
+<meta name="viewport" content="width=device-width, initial-scale=1.0">      
+<title>Patient Information Formatter</title>      
+<link rel="stylesheet" href="style.css">  
+</head>  
+<style>  
+textarea {      width: 80%;      height: 50px;      margin-bottom: 10px;      padding: 10px;      border: 1px solid #ccc;      border-radius: 4px;      resize: both; /* Allows resizing both horizontally and vertically */  }  
+</style>  
+<body>      
+<div class="container">          
+<h1></h1>          
+<textarea id="inputText" placeholder="Paste patient information here..."></textarea>          
+<button onclick="formatText()">Format</button>          
+<button onclick="copyText()">Copy</button>          
+<pre id="outputText"></pre>      
+</div>     
+ <script src="script.js">
+</script>  
+</body>  
+</html>
