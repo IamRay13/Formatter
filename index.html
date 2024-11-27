@@ -1,23 +1,87 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>      
-<meta charset="UTF-8">      
-<meta name="viewport" content="width=device-width, initial-scale=1.0">      
-<title>Patient Information Formatter</title>      
-<link rel="stylesheet" href="style.css">  
-</head>  
-<style>  
-textarea {      width: 80%;      height: 50px;      margin-bottom: 10px;      padding: 10px;      border: 1px solid #ccc;      border-radius: 4px;      resize: both; /* Allows resizing both horizontally and vertically */  }  
-</style>  
-<body>      
-<div class="container">          
-<h1></h1>          
-<textarea id="inputText" placeholder="Paste patient information here..."></textarea>          
-<button onclick="formatText()">Format</button>          
-<button onclick="copyText()">Copy</button>          
-<pre id="outputText"></pre>      
-</div>     
- <script src="script.js">
-</script>  
-</body>  
-</html>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Text Formatter</title>
+     <style>
+  h1 {
+      color: #009688;
+}
+        body {
+             font-family: Arial, sans-serif;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             background-color: #e0f7fa;
+             margin: 0;
+             flex-direction: column;
+         }
+         textarea {
+             width: 300px;
+             height: 150px;
+             margin-bottom: 20px;
+             padding: 10px;
+             border-radius: 5px;
+             border: 1px solid #009688;
+             background-color: #ffffff;
+             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         }
+         .button-container {
+             display: flex;
+             gap: 10px;
+         }
+         button {
+             padding: 10px 20px;
+             font-size: 24px;
+             cursor: pointer;
+             border: none;
+             border-radius: 5px;
+             background-color: #009688;
+             color: #ffffff;
+             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+             transition: background-color 0.3s;
+         }
+         button:hover {
+             background-color: #0056b3;
+         }
+         pre {
+             background-color: #ffffff;
+             padding: 10px;
+             border: 1px solid #009688;
+             border-radius: 5px;
+             width: 300px;
+             height: 150px;
+             overflow: auto;
+             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         }
+     </style>
+ </head>
+ <body>
+ <h1Patient Information Formatter/h1>
+     <textarea id="inputText" placeholder="Enter text here..."></textarea>
+     <div class="button-container">
+         <button onclick="formatText()">Format Text</button>
+         <button onclick="copyText()">Copy Text</button>
+     </div>
+     <pre id="outputText"></pre>
+    <script>
+         function formatText() {
+             const inputText = document.getElementById('inputText').value;
+             const formattedText = inputText.replace(/Patient ID(\d+)/, 'Patient ID $1')
+                                            .replace(/DOB(\d{1,2})\/(\d{1,2})\/(\d{4})/, (_, m, d, y) => `DOB ${m.padStart(2, '0')}/${d.padStart(2, '0')}/${y}`)
+                                            .replace(/DEMICCO, LOUIS/, 'OHH\nDEMICCO, LOUIS')
+                                            .replace(/\n\s*\n/g, '\n'); // Remove extra newlines
+             document.getElementById('outputText').textContent = formattedText.trim();
+         }
+        function copyText() {
+             const outputText = document.getElementById('outputText').textContent;
+             navigator.clipboard.writeText(outputText).catch(err => {
+                 console.error('Failed to copy text: ', err);
+             });
+         }
+     </script>
+ </body>
+ </html>
+  
